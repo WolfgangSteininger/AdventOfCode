@@ -36,7 +36,7 @@ def puzzle2():
     values = getinput('input_day2')
     correctcount = 0
     for pwd in values:
-        if (pwd.password[pwd.rangeMin-1] == pwd.targetChar and not pwd.password[pwd.rangeMax-1] == pwd.targetChar) or (not pwd.password[pwd.rangeMin-1] == pwd.targetChar and pwd.password[pwd.rangeMax-1] == pwd.targetChar):
+        if (pwd.password[pwd.rangeMin-1] == pwd.targetChar) ^ (pwd.password[pwd.rangeMax-1] == pwd.targetChar):
             correctcount += 1
 
     return correctcount
