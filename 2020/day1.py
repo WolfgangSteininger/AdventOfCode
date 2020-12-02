@@ -1,14 +1,14 @@
 from inputloader import *
 
 def puzzle1():
-    values = getInput('input_day1')
+    values = getinput('input_day1')
     for a in values:
         for b in values:
             if a + b == targetSum:
                 return a * b
 
 def puzzle2():
-    values = getInput('input_day1')
+    values = getinput('input_day1')
     for a in values:
         for b in values:
             if a+b > targetSum:

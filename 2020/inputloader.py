@@ -1,4 +1,4 @@
-def getInput(filename):
+def getinput(filename):
     values = []
     with open(filename, 'r') as f:
         for line in f:
