@@ -2,8 +2,6 @@ tree = '#'
 free = '.'
 xmax = len(open('input_day3').readline().strip())
 ymax = len(open('input_day3').readlines())
-sright = 3
-sdwon = 1
 
 
 def getinput(filename):
@@ -15,9 +13,9 @@ def getinput(filename):
     return values
 
 
-def updateposition(currentpos):
+def updateposition(currentpos, sright, sdown):
     currentpos[0] += sright
-    currentpos[1] += sdwon
+    currentpos[1] += sdown
 
     if currentpos[0] >= xmax:
         currentpos[0] = currentpos[0] - xmax
@@ -25,35 +23,34 @@ def updateposition(currentpos):
     return currentpos
 
 
-def puzzle1():
+def puzzle1(speedr, speedd):
     values = getinput('input_day3')
     treessmashed = 0
     currentpos = [0, 0]
-    rowsi = 0
 
-    for rows in values:
-        cp = rows[currentpos[0]]
+    for i in range(0,ymax, speedd):
+        row = values[i]
+        cp = row[currentpos[0]]
 
         if cp == tree:
             treessmashed += 1
-            rows[currentpos[0]] = 'X'
+            row[currentpos[0]] = 'X'
         else:
-            rows[currentpos[0]] = 'O'
-        print(rows)
-        currentpos = updateposition(currentpos)
+            row[currentpos[0]] = 'O'
+        # print(row)
+        currentpos = updateposition(currentpos, speedr, speedd)
 
     return treessmashed
 
 
 def puzzle2():
-    values = getinput('input_day2')
-    correctcount = 0
-    for pwd in values:
-        if (pwd.password[pwd.rangeMin - 1] == pwd.targetChar) ^ (pwd.password[pwd.rangeMax - 1] == pwd.targetChar):
-            correctcount += 1
+    speeds = [1, 1], [3, 1], [5, 1], [7, 1], [1, 2]
+    amountpossiblechristmastreesavailableafterallruns = 1
+    for speed in speeds:
+        amountpossiblechristmastreesavailableafterallruns *= (puzzle1(speed[0], speed[1]))
 
-    return correctcount
+    return amountpossiblechristmastreesavailableafterallruns
 
 
-print(puzzle1())
-#print(puzzle2())
+print(puzzle1(3, 1))
+print(puzzle2())
