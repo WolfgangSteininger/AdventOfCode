@@ -2,7 +2,6 @@
 # F = (u-1+l)/2
 # B = (u+1+l)/2
 def calctree(input, value):
-    r = 0
 
     if len(input) == 1:
         if input == 'F' or input == 'L':  # lower
@@ -30,7 +29,6 @@ def calcid(row, column):
 
 
 def getinput(filename):
-    values = []
     with open(filename, 'r') as f:
         return f.readlines()
 
@@ -42,27 +40,40 @@ def calcrow(input):
 def calccolumn(input):
     return calctree(input[len(input) - 3:], (0, 7))
 
-ids = []
-for ticket in getinput('input_day5'):
-    ticket = ticket.strip()
-    row = calcrow(ticket)
-    column = calccolumn(ticket)
-    ticketid = calcid(row, column)
 
-    ids.append(ticketid)
+def approach1():
+    ids = []
+    for ticket in getinput('input_day5'):
+        ticket = ticket.strip()
+        row = calcrow(ticket)
+        column = calccolumn(ticket)
+        ticketid = calcid(row, column)
 
-ids.sort()
-last = ids[0]-1
-for id in ids:
-    if id - last > 1:
-        print(f'my ticket {id-1}')
-    last = id
+        ids.append(ticketid)
 
-print(max(ids))
-print(min(ids))
+    ids.sort()
+    last = ids[0] - 1
+    for id in ids:
+        if id - last > 1:
+            print(f'my ticket {id - 1}')
+        last = id
+
+    print(f'highest id: {max(ids)}')
+    return ids
 
 
-#getinput('input_day5').
+def alternativgauß(ids):
+    upper = max(ids)
+    lower = min(ids)
+    ticketsum = sum(ids)
+    # summenformel n*(n+1)/2  ==>   (n-(x-1))*(n+x)/2
+    targetsum = ((upper - (lower - 1)) * (upper + lower)) / 2
+    print(f'Gauß says {targetsum - ticketsum}')
+
+
+ids = approach1()
+alternativgauß(ids)
+
 
 def test():
     # test
