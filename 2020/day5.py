@@ -36,37 +36,48 @@ def getinput(filename):
 
 
 def calcrow(input):
-    return calctree(input[0:len(input) - 3], (0, 127))
+    return calctree(input[:len(input) - 3], (0, 127))
 
 
 def calccolumn(input):
-    return calctree(input[len(input) - 3: len(input)], (0, 7))
+    return calctree(input[len(input) - 3:], (0, 7))
 
-
-maxid = 0
+ids = []
 for ticket in getinput('input_day5'):
     ticket = ticket.strip()
     row = calcrow(ticket)
     column = calccolumn(ticket)
     ticketid = calcid(row, column)
-    if ticketid > maxid:
-        maxid = ticketid
 
-print(maxid)
+    ids.append(ticketid)
 
-# test
-print('==== TEST ====')
-print(calcrow('FBFBBFFRLR') == 44)
-print(calcrow('BFFFBBFRRR') == 70)
-print(calcrow('FFFBBBFRRR') == 14)
-print(calcrow('BBFFBBFRLL') == 102)
-print('==============')
-print(calccolumn('FBFBBFFRLR') == 5)
-print(calccolumn('BFFFBBFRRR') == 7)
-print(calccolumn('FFFBBBFRRR') == 7)
-print(calccolumn('BBFFBBFRLL') == 4)
-print('==============')
-print(calcid(calcrow('FBFBBFFRLR'), calccolumn('FBFBBFFRLR')) == 357)
-print(calcid(calcrow('BFFFBBFRRR'), calccolumn('BFFFBBFRRR')) == 567)
-print(calcid(calcrow('FFFBBBFRRR'), calccolumn('FFFBBBFRRR')) == 119)
-print(calcid(calcrow('BBFFBBFRLL'), calccolumn('BBFFBBFRLL')) == 820)
+ids.sort()
+last = ids[0]-1
+for id in ids:
+    if id - last > 1:
+        print(f'my ticket {id-1}')
+    last = id
+
+print(max(ids))
+print(min(ids))
+
+
+#getinput('input_day5').
+
+def test():
+    # test
+    print('==== TEST ====')
+    print(calcrow('FBFBBFFRLR') == 44)
+    print(calcrow('BFFFBBFRRR') == 70)
+    print(calcrow('FFFBBBFRRR') == 14)
+    print(calcrow('BBFFBBFRLL') == 102)
+    print('==============')
+    print(calccolumn('FBFBBFFRLR') == 5)
+    print(calccolumn('BFFFBBFRRR') == 7)
+    print(calccolumn('FFFBBBFRRR') == 7)
+    print(calccolumn('BBFFBBFRLL') == 4)
+    print('==============')
+    print(calcid(calcrow('FBFBBFFRLR'), calccolumn('FBFBBFFRLR')) == 357)
+    print(calcid(calcrow('BFFFBBFRRR'), calccolumn('BFFFBBFRRR')) == 567)
+    print(calcid(calcrow('FFFBBBFRRR'), calccolumn('FFFBBBFRRR')) == 119)
+    print(calcid(calcrow('BBFFBBFRLL'), calccolumn('BBFFBBFRLL')) == 820)
