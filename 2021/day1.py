@@ -98,9 +98,8 @@ class test:
 
 test()
 
-f = open(".\input_day1","r")
+f = open('2021/inputs/day_01',"r")
 values = f.read()
 
-print(puzzle1().getResult(values), end = "; ")
-
-print(puzzle2().getResult(values), end = "; ")
+print(f"puzzle 1 = {puzzle1().getResult(values)}", end = " ")
+print(f"puzzle 2 = {puzzle2().getResult(values)}")
