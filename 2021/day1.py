@@ -98,7 +98,7 @@ class test:
 
 test()
 
-f = open('2021/inputs/day_01',"r")
+f = open('2021/inputs/day_01.txt',"r")
 values = f.read()
 
 print(f"puzzle 1 = {puzzle1().getResult(values)}", end = " ")

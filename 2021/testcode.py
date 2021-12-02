@@ -26,3 +26,6 @@ for f in s:
     #print(f, end=" ")
     print(f"A: {f.A} B: {f.B}")
     
+    
+    
+    
