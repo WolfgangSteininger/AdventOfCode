@@ -5,26 +5,26 @@ class puzzle1():
     def getinput(self, inputstring):
         values = str.splitlines(inputstring)
         values = list(map(lambda x: str.split(x, " "), values ))
+        # improved use of the for operator providing tuples
+        values = [(d, int(v)) for [d,v] in values]
         return list(values)
 
     def calculatedepth(self, measurements):
         
         #result = functools.reduce(lambda a,b: a+int(b[1]) if b[0] == "down" else a, measurements) 
-        #up
-        #forward
-        h = 0
-        p = 0
+       
+        height = 0
+        position = 0
         
-        for m in measurements:
-            v = int(m[1])
-            if m[0] == "down":
-                h = h + v
-            elif m[0] == "up":
-                h = h - v
-            elif m[0] == "forward":
-                p += v
+        for d, v in measurements:
+            if d == "down":
+                height = height + v
+            elif d == "up":
+                height = height - v
+            elif d == "forward":
+                position += v
         
-        return p*h
+        return position*height
 
     def getResult(self, inputString):
         return self.calculatedepth(self.getinput(inputString))
@@ -36,24 +36,25 @@ class puzzle2():
     def getinput(self, inputstring):
         values = str.splitlines(inputstring)
         values = list(map(lambda x: str.split(x, " "), values ))
+         # improved use of the for operator providing tuples
+        values = [(d, int(v)) for [d,v] in values]
         return list(values)
 
     def calculatedepth(self, measurements):
         aim = 0
-        h = 0
-        p = 0
+        height = 0
+        position = 0
         
-        for m in measurements:
-            v = int(m[1])
-            if m[0] == "down":
+        for d, v in measurements:
+            if d == "down":
                 aim = aim + v
-            elif m[0] == "up":
+            elif d == "up":
                 aim = aim - v
-            elif m[0] == "forward":
-                p += v
-                h = h + aim*v
+            elif d == "forward":
+                position += v
+                height = height + aim*v
         
-        return p*h
+        return position*height
 
     def getResult(self, inputString):
         return self.calculatedepth(self.getinput(inputString))
