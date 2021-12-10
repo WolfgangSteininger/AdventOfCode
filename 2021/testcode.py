@@ -28,4 +28,27 @@ for f in s:
     
     
     
-    
+# you are a wizard 'arrays!
+testarray = [[1,2,3,4],
+             [2,2,2,0],
+             [0,10,3,2],
+             [1,20,0,9]]
+
+
+t2 = testarray.copy()
+t2.remove([2,2,2,0])
+print(testarray)
+print(t2)
+testarray[0][0] = 999
+print(testarray)
+print(t2)
+
+# sum over an array/matrix
+print(sum(sum(testarray, start=[])))
+
+# using zip to transpose a matrix
+print(list(zip(*testarray)))
+
+# set returns the distinct elements of that iterable
+print(set(testarray[1]))
+print(set(testarray[0]))
